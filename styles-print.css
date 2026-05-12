@@ -1,0 +1,92 @@
+/* Print-specific overrides */
+
+.print-doc {
+  background: var(--bg);
+}
+
+.print-cover {
+  position: relative;
+  padding: 80px 56px 56px;
+  min-height: 100vh;
+  background: var(--bg-2);
+  break-after: page;
+  page-break-after: always;
+}
+
+.print-page {
+  break-before: page;
+  page-break-before: always;
+  padding: 0;
+  background: var(--bg);
+}
+
+.print-page-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 14px 56px;
+  border-bottom: 1px solid var(--line);
+  background: var(--bg-2);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 10px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-3);
+}
+
+.print-main {
+  max-width: none !important;
+  padding: 36px 56px 56px !important;
+}
+
+/* Hide footer nav buttons in print */
+.print-main .module-footer { display: none !important; }
+
+/* Prevent cards/sections from being split */
+.card {
+  break-inside: avoid;
+  page-break-inside: avoid;
+}
+.module-header {
+  break-inside: avoid;
+  page-break-inside: avoid;
+  break-after: avoid;
+}
+
+/* Slightly tighter in print */
+.print-main h1 { font-size: 38px; }
+.print-main .lede { font-size: 15px; }
+.print-main .huge-n { font-size: 96px; }
+
+/* Print media */
+@media print {
+  @page {
+    size: A4 portrait;
+    margin: 0.8cm;
+  }
+  html, body {
+    background: var(--bg) !important;
+    -webkit-print-color-adjust: exact;
+    print-color-adjust: exact;
+  }
+  .print-cover, .print-page {
+    min-height: auto;
+  }
+  .print-main {
+    padding: 20px 20px 20px !important;
+  }
+  .print-page-header { padding: 8px 20px; }
+  .print-cover { padding: 50px 30px; }
+
+  /* Force display of every interactive */
+  .btn, button { border: 1px solid var(--line) !important; }
+
+  /* Ensure color-printing of bits */
+  .bit-switch.on { background: var(--on) !important; color: white !important; }
+  .pixel.on { background: var(--ink) !important; }
+}
+
+/* Always ensure colors print */
+* {
+  -webkit-print-color-adjust: exact !important;
+  print-color-adjust: exact !important;
+}
