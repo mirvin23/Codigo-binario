@@ -2,7 +2,7 @@
 
 Aplicación web educativa de 8 módulos para aprender el sistema binario desde cero. Diseñada para alumnos de 7mo grado en la materia Tecnología.
 
-**→ [Ver la app en vivo](#)** *(reemplazá con tu URL de GitHub Pages o Netlify)*
+**→ [Ver la app en vivo](#)** *https://mirvin23.github.io/Codigo-binario/*
 
 ---
 
