@@ -28,6 +28,7 @@ function Card({ children, style }) {
 /* ═══════════════ MÓDULO 1 — ¿Qué es el binario? ═══════════════ */
 function ModuleIntro({ onAdvance }) {
   const [bits, setBits] = useState([0, 1, 0, 0, 0, 0, 0, 1]); // 65 = 'A'
+  const [lastTarget, setLastTarget] = useState(null);
   const decimal = bits.reduce((acc, b, i) => acc + b * powers[i], 0);
   const flip = (i) => setBits(bits.map((b, j) => j === i ? (b ? 0 : 1) : b));
 
@@ -95,8 +96,8 @@ function ModuleIntro({ onAdvance }) {
         <div className="grid-3" style={{ marginTop: 18 }}>
           {[7, 42, 170, 255, 100, 1].map(target => (
             <button key={target} className="btn ghost" onClick={() => {
-              const b = toBin(target, 8).split('').map(Number);
-              setBits(b);
+              setBits(toBin(target, 8).split('').map(Number));
+              setLastTarget(target);
             }}>→ formar {target}</button>
           ))}
         </div>
@@ -104,6 +105,38 @@ function ModuleIntro({ onAdvance }) {
           <b>Observa:</b> con 8 bits el valor máximo es <span className="mono">11111111 = 255</span>.
           Por eso los colores y muchos valores en informática van de <b>0 a 255</b>: caben justo en 1 byte.
         </div>
+        {lastTarget !== null && (() => {
+          const bin = toBin(lastTarget, 8);
+          const active = bin.split('').map((b, i) => b === '1' ? powers[i] : null).filter(Boolean);
+          return (
+            <div key={lastTarget} className="fade-in" style={{
+              marginTop: 16, padding: '16px 18px',
+              background: 'var(--bg)', border: '1px solid var(--line)',
+              borderRadius: 10, display: 'flex', flexDirection: 'column', gap: 8
+            }}>
+              <div style={{ display: 'flex', alignItems: 'center', gap: 14, flexWrap: 'wrap' }}>
+                <span style={{ fontFamily: 'Space Grotesk', fontSize: 36, fontWeight: 600, color: 'var(--on)', lineHeight: 1 }}>
+                  {lastTarget}
+                </span>
+                <span className="mono" style={{ fontSize: 20, letterSpacing: '0.15em', color: 'var(--ink)' }}>
+                  {bin}
+                </span>
+              </div>
+              <div className="mono" style={{ fontSize: 13, color: 'var(--ink-3)' }}>
+                {active.length === 0 ? (
+                  <span>todos los bits apagados → 0</span>
+                ) : (
+                  <>{active.map((p, i) => (
+                    <React.Fragment key={i}>
+                      <b style={{ color: 'var(--ink)' }}>{p}</b>
+                      {i < active.length - 1 ? <span> + </span> : null}
+                    </React.Fragment>
+                  ))} <span>= </span><b style={{ color: 'var(--on)' }}>{lastTarget}</b></>
+                )}
+              </div>
+            </div>
+          );
+        })()}
       </Card>
 
       <div className="module-footer">
