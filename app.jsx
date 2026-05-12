@@ -84,6 +84,15 @@ function App() {
 
       <main className="main" data-screen-label={`${MODULES[active].eyebrow} ${MODULES[active].label}`}>
         <Current.Comp key={active} />
+        <footer className="site-footer">
+          <span>Prof. Erwin Cortez</span>
+          <span className="sep">·</span>
+          <span>Tecnología · 7mo grado</span>
+          <span className="sep">·</span>
+          <span>2026</span>
+          <span className="sep">·</span>
+          <a href="mailto:profe.erwin.cortez@gmail.com">profe.erwin.cortez@gmail.com</a>
+        </footer>
       </main>
     </div>
   );

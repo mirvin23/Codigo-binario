@@ -755,3 +755,25 @@ table.btable td b { color: var(--on); font-weight: 500; }
   .app { grid-template-columns: 1fr; }
   .sidebar { position: static; height: auto; }
 }
+
+/* ——— Footer ——— */
+.site-footer {
+  margin-top: 60px;
+  padding: 20px 0 8px;
+  border-top: 1px solid var(--line);
+  font-family: 'JetBrains Mono', monospace;
+  font-size: 11px;
+  letter-spacing: 0.06em;
+  color: var(--ink-3);
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.site-footer .sep { color: var(--line-2); }
+.site-footer a {
+  color: var(--ink-3);
+  text-decoration: none;
+  transition: color 0.15s;
+}
+.site-footer a:hover { color: var(--on); }
